@@ -19,7 +19,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleException() {
-        MyException exceptionResponse = new MyException("Invalid request", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        MyException exceptionResponse = new MyException("Invalid request", HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }
