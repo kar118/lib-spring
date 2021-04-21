@@ -37,8 +37,10 @@ public class DashboardController {
 
     @PostMapping("/dashboard")
     public ResponseEntity addBook(@RequestBody Book book) {
-        if(dashboardService.addBook(book))
+        if(this.isValid(book)) {
+            dashboardService.addBook(book);
             return new ResponseEntity<>(dashboardService.getBooks(), HttpStatus.CREATED);
+        }
         throw new LibraryException("Cannot add this book to the library.", HttpStatus.BAD_REQUEST);
     }
 
@@ -48,5 +50,16 @@ public class DashboardController {
         if (removedBook != null)
             return new ResponseEntity<>(removedBook, HttpStatus.OK);
         throw new LibraryException("There is no book with such id.", HttpStatus.NOT_FOUND);
+    }
+
+    public boolean isValid(Book book) {
+        if (
+                !book.getTitle().equals(null) &&
+                !book.getYear().equals(null) &&
+                !book.getAuthor().equals(null)
+        )
+            return true;
+        else
+            return false;
     }
 }

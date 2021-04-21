@@ -17,7 +17,6 @@ public class DashboardService {
     }
 
     public boolean addBook(Book book) {
-        book.setId(Book.getIdGenerator());
         return this.books.add(book);
     }
 
